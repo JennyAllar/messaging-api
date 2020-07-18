@@ -3,8 +3,7 @@ require 'rails_helper'
 RSpec.describe UsersController, type: :controller do
     context 'a successful request' do
         before do
-            User.create!({ :name => 'Jamie Buchman', :email => 'jamie@buchman.com' })
-            User.create!({ :name => 'Paul Buchman', :email => 'paul@buchman.com' })
+            @user = create(:user)
         end
 
         describe '#GET index' do
