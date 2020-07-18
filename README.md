@@ -55,3 +55,7 @@ A --> C(Round Rect)
 B --> D{Rhombus}
 C --> D
 ```
+
+### Stretch Goals
+- Emoji Leaderboard
+- Friend relationships
