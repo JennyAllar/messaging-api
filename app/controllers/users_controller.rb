@@ -1,5 +1,3 @@
-require 'pry'
-
 class UsersController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound do |e|
     render json: 'user not found'
