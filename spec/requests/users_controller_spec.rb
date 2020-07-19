@@ -43,3 +43,23 @@ RSpec.describe 'User creation route', type: :request do
     end
   end
 end
+
+RSpec.describe 'User show route' do
+  context 'a user can be found' do
+    it 'returns a user record' do
+      user = create(:user)
+      get "/users/#{user.id}", params: {}
+      expect(response).to be_successful
+      expect(response.body).to include(user.email)
+      expect(response.status).to eq(200)
+    end
+  end
+
+  context 'a user cannot be found' do
+    it 'returns a message' do
+      get "/users/99999", params: {}
+      expect(response.body).to include('That record could not be found.')
+      expect(response.status).to eq(404)
+    end
+  end
+end
