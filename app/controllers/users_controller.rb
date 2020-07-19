@@ -1,4 +1,10 @@
+require 'pry'
+
 class UsersController < ApplicationController
+  rescue_from ActiveRecord::RecordNotFound do |e|
+    render json: 'user not found'
+  end
+
   def index
     @users = User.all.pluck(:name, :email)
     count = User.count
@@ -6,12 +12,17 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
-    if @user.save!
+    user = User.new(user_params)
+    if user.save!
       render json: { user: @user }, status: 201
     else
-      render json: { error: @user.errors.full_messages}, status: 400
+      render json: 'unable to create user', status: 400
+      return
     end
+  end
+
+  def show
+    @user = User.find_by(email: params[:email])
   end
 
 

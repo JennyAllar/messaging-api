@@ -10,6 +10,7 @@ RSpec.describe 'Get all users route', type: :request do
             it 'returns a successful response' do
                 get '/users', params: {}
                 expect(response).to be_successful
+                expect(response.status).to eq(200)
             end
 
             it 'displays the total user count and users' do
@@ -19,4 +20,26 @@ RSpec.describe 'Get all users route', type: :request do
             end
         end
     end
+end
+
+RSpec.describe 'User creation route', type: :request do
+  context 'a successful request' do
+    describe '#POST user' do
+      it 'returns a successful response' do
+        post '/users', params: { user: {name: 'Jim Halpert', email: 'bigtuna@dundermifflin.com' }}
+        expect(response).to be_successful
+        expect(response.status).to eq(201)
+      end
+    end
+  end
+  context 'an unsuccessful request' do
+    describe '#POST user' do
+      it 'returns an error message when user cannot be created' do
+        post '/users', params: { user: {name: 'Andy', email: nil }}
+        expect(response).to_not be_successful
+        expect(response.body).to include("Email can't be blank")
+        expect(response.status).to eq(400)
+      end
+    end
+  end
 end
