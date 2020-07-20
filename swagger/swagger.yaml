@@ -5,6 +5,17 @@ info:
   version: v1
 paths:
   "/conversations":
+    get:
+      summary: Get all Conversations
+      tags:
+      - Conversations
+      responses:
+        '201':
+          description: conversations found
+          content: {}
+        '400':
+          description: invalid request
+          content: {}
     post:
       summary: Create a Conversation
       tags:
@@ -30,7 +41,56 @@ paths:
               required:
               - sender_id
               - receipient_id
+  "/conversations/:id":
+    get:
+      summary: Get a conversation
+      tags:
+      - Conversations
+      parameters:
+        - in: path
+          name: conversation_id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the conversation to get
+      responses:
+        '201':
+          description: conversation found
+          content: {}
+        '400':
+          description: invalid request
+          content: {}
+  "/conversations/:id/messages":
+    get:
+      summary: Get a conversations messages
+      tags:
+      - Messages
+      parameters:
+        - in: path
+          name: conversation_id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the messages' conversation
+      responses:
+        '201':
+          description: conversation found
+          content: {}
+        '400':
+          description: invalid request
+          content: {}
   "/users":
+    get:
+      summary: Get all Users
+      tags:
+      - Users
+      responses:
+        '201':
+          description: users found
+          content: {}
+        '400':
+          description: invalid request
+          content: {}
     post:
       summary: Create a User
       tags:
@@ -54,7 +114,46 @@ paths:
                 email:
                   type: string
               required:
-              - name
               - email
+  "/users/:id":
+    get:
+      summary: Get a User
+      tags:
+      - Users
+      parameters:
+        - in: path
+          name: user_id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the user to get
+      responses:
+        '201':
+          description: user found
+          content: {}
+        '400':
+          description: invalid request
+          content: {}
+
+  "/user/:id/messages":
+    get:
+      summary: Get a users messages
+      tags:
+      - Users
+      parameters:
+        - in: path
+          name: user_id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the user to find messages
+      responses:
+        '201':
+          description: user found
+          content: {}
+        '400':
+          description: invalid request
+          content: {}
+
 servers:
 - url: https://guild-api.herokuapp.com

@@ -75,7 +75,7 @@ end
 
 RSpec.describe 'User messages route' do
   context 'a user can be found' do
-    it 'returns a user record' do
+    it 'returns a users messages' do
       sender = create(:user)
       recipient = create(:user)
       conversation = create(:conversation, sender: sender, recipient: recipient)

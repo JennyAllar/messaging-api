@@ -6,8 +6,6 @@ ruby '2.5.0'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
 gem 'puma', '~> 4.1'
 gem 'pg'
-# Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'rack-cors'
 gem 'rswag'
