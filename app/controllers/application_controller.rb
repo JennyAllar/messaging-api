@@ -1,5 +1,3 @@
-require 'pry'
-
 class ApplicationController < ActionController::API
   rescue_from Exception, with: :exception_handler
 
