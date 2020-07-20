@@ -1,12 +1,13 @@
 class ConversationsController < ApplicationController
-  # def index
-  #   @conversations = Conversation.all
-  #   render json: { conversations: @conversations }, status: 200
-  # end
+  def index
+    @conversations = Conversation.all
+    render json: { conversations: @conversations }, status: 200
+  end
 
   def create
     if Conversation.between(params[:sender_id],params[:recipient_id]).present?
       @conversation = Conversation.between(params[:sender_id], params[:recipient_id]).first
+      render json: { chat: @conversation }, status: 201
     else
       @conversation = Conversation.create!(conversation_params)
       render json: { chat: @conversation }, status: 201

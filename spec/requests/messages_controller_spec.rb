@@ -3,21 +3,51 @@ require 'rails_helper'
 RSpec.describe 'Get all messages in a conversation', type: :request do
   context 'a successful request' do
     before do
-      user1 = create(:user)
-      user2 = create(:user)
-      @conversation = Conversation.new(recipient_id: user1.id, sender_id: user2.id)
-      @conversation.save!
-
-      @message = @conversation.messages.new(content: "So nice to see you!", user_id: user1.id)
-      @message.save!
+      @sender = create(:user)
+      @recipient = create(:user)
+      @conversation = create(:conversation, sender: @sender, recipient: @recipient)
+      @message = create(:message, content: "So lovely to see you!", conversation_id: @conversation.id, user: @conversation.recipient)
     end
 
     describe '#GET conversation messages' do
       it 'returns a successful response' do
         get "/conversations/#{@conversation.id}/messages", params: {}
 
-        expect(response.body).to include("So nice to see you!")
+        expect(response).to be_successful
         expect(response.status).to eq(200)
+        expect(JSON.parse(response.body)["messages"].first["content"]).to eq("So lovely to see you!")
+        expect(JSON.parse(response.body)["messages"].first["user_id"]).to eq(@recipient.id)
+      end
+    end
+
+    describe '#GET conversation messages' do
+      it 'returns exactly 100 messages if there are 100 or more' do
+        103.times do |i|
+          create(
+            :message,
+            content: "So nice to see you, #{i}",
+            conversation_id: @conversation.id,
+            user: @conversation.recipient
+          )
+        end
+
+        get "/conversations/#{@conversation.id}/messages", params: {}
+
+        expect(response).to be_successful
+        expect(JSON.parse(response.body)["total"]).to eq(104)
+        expect(JSON.parse(response.body)["messages"].count).to eq(100)
+      end
+    end
+
+    describe '#POST message' do
+      it 'saves the message and returns the conversation' do
+
+        post "/conversations/#{@conversation.id}/messages", params: { content: 'oh hi', user_id: @recipient.id }
+
+        expect(response).to be_successful
+        expect(JSON.parse(response.body)["messages"].first["user_id"]).to eq(@recipient.id)
+        expect(JSON.parse(response.body)["messages"].count).to eq(2)
+        expect(JSON.parse(response.body)["total"]).to eq(2)
       end
     end
   end

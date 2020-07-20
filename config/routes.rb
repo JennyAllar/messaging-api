@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :users
-  resources :conversations, only: [:create, :show] do
+  resources :conversations, only: [:index, :create, :show] do
     resources :messages, only: [:create, :index]
   end
 

@@ -1,18 +1,14 @@
+require 'pry'
+
 class ApplicationController < ActionController::API
-  unless Rails.env.development?
-    rescue_from Exception, with: :exception_handler
-  end
+  rescue_from Exception, with: :exception_handler
 
   def exception_handler(exception)
     case exception
-    # You can define your own exception somewhere
-    # raise it in the code and catch here
     when ActiveRecord::RecordInvalid
-      render json: { message: "Record could not be created. #{exception}" }, status: :bad_request
+      render json: { message: "Record could not be created. #{exception.to_s}" }, status: :bad_request
     when ActiveRecord::RecordNotFound
       render json: { message: 'That record could not be found.' }, status: :not_found
-    else
-      render json: { message: 'Internal error' }, status: :internal_server_error
     end
   end
 

@@ -1,17 +1,19 @@
+require 'pry'
+
 class MessagesController < ApplicationController
   before_action do
     @conversation = Conversation.find(params[:conversation_id])
+    @messages = @conversation.messages
+    @total_messages = @messages.length
   end
 
   def index
     @messages = @conversation.messages
-
-    if @messages.length > 100
-      @over_100 = true
+    if @total_messages > 100
       @messages = @messages[-100..-1]
     end
 
-    render json: @messages, status: 200
+    render json: { total: @total_messages, messages: @messages }, status: 200
   end
 
   def new
@@ -19,10 +21,10 @@ class MessagesController < ApplicationController
   end
 
   def create
-    binding.pry
     @message = @conversation.messages.new(message_params)
     if @message.save
-      render json: { message: @conversation }, status: 201
+      @total_messages += 1
+      render json: { total: @total_messages, messages: @messages }, status: 201
     end
   end
 
