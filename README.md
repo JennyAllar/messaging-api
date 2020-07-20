@@ -1,6 +1,7 @@
 # Guild Education - API Challenge
 ![Coverage](https://github.com/JennyAllar/messaging-api/blob/master/badge.svg)
-Hi to Rick & the team!
+___
+**Hello to Rick & the team!**
 
 Thanks so much for the opportunity to build this API! I was stoked from the moment I started piecing the architecture together in my head and have had an absolute ball on the project.
 
