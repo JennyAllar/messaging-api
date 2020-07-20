@@ -1,5 +1,7 @@
 # Guild Education - API Challenge
- [![Coverage](https://jennyallar.github.io/messaging-api/badge.svg)](https://github.com/jennyallar/messaging-api/badge.svg)
+ ![Coverage](https://github.com/JennyAllar/messaging-api/blob/master/badge.svg)
+ 
+ 
 
 ## Requirements
 - Global API with no security parameters
@@ -32,30 +34,7 @@ User has_and_belongs_to_many conversations
 Conversation has_many messages
 Conversation has_and_belongs_to_many users
 
-## UML diagrams
-
-```mermaid
-sequenceDiagram
-Web App ->> Chat API: GET request: {}
-Bob-->>John: How about you John?
-Bob--x Alice: I am good thanks!
-Bob-x John: I am good thanks!
-Note right of John: Bob thinks a long<br/>long time, so long<br/>that the text does<br/>not fit on a row.
-
-Bob-->Alice: Checking with John...
-Alice->John: Yes... John, how are you?
-```
-
-And this will produce a flow chart:
-
-```mermaid
-graph LR
-A[Square Rect] -- Link text --> B((Circle))
-A --> C(Round Rect)
-B --> D{Rhombus}
-C --> D
-```
-
 ### Stretch Goals
 - Emoji Leaderboard
 - Friend relationships
+- ASCII Art easter egg
