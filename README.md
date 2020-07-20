@@ -8,9 +8,13 @@ I used Rails 6 with Ruby 2.5.0 and that gave me the opportunity to stretch some 
 
 ## Using the Application Locally
 `$ git clone git@github.com:JennyAllar/messaging-api.git`
+
 `$ cd messaging-api`
+
 `$ rake db:setup`
+
 `$ bundle install`
+
 `$ rails s`
 And you're off to the races!
 
