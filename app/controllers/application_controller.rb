@@ -3,7 +3,7 @@ class ApplicationController < ActionController::API
 
   def exception_handler(exception)
     case exception
-    when ActiveRecord::RecordInvalid
+    when ActiveRecord::RecordInvalid, ActionController::ParameterMissing
       render json: { message: "Record could not be created. #{exception.to_s}" }, status: :bad_request
     when ActiveRecord::RecordNotFound
       render json: { message: 'That record could not be found.' }, status: :not_found

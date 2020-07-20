@@ -38,6 +38,16 @@ RSpec.describe 'Get all messages in a conversation', type: :request do
         expect(JSON.parse(response.body)["messages"].count).to eq(100)
       end
     end
+  end
+end
+RSpec.describe 'Get all messages in a conversation', type: :request do
+  context 'a successful request' do
+    before do
+      @sender = create(:user)
+      @recipient = create(:user)
+      @conversation = create(:conversation, sender: @sender, recipient: @recipient)
+      @message = create(:message, content: "So lovely to see you!", conversation_id: @conversation.id, user: @conversation.recipient)
+    end
 
     describe '#POST message' do
       it 'saves the message and returns the conversation' do
@@ -48,6 +58,10 @@ RSpec.describe 'Get all messages in a conversation', type: :request do
         expect(JSON.parse(response.body)["messages"].first["user_id"]).to eq(@recipient.id)
         expect(JSON.parse(response.body)["messages"].count).to eq(2)
         expect(JSON.parse(response.body)["total"]).to eq(2)
+
+        post "/conversations/#{@conversation.id}/messages", params: { content: 'what is happening?!', user_id: @sender.id }
+        expect(JSON.parse(response.body)["messages"].count).to eq(3)
+        expect(JSON.parse(response.body)["total"]).to eq(3)
       end
     end
   end

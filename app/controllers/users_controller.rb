@@ -19,10 +19,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def messages
+    @messages = Message.where(user_id: params[:id])
+    if @messages
+      render json: {conversations: @messages }
+    end
+  end
 
   private
 
   def user_params
-    params.require(:user).permit(:name, :email)
+    params.permit(:name, :email)
   end
 end
