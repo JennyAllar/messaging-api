@@ -79,6 +79,37 @@ paths:
         '400':
           description: invalid request
           content: {}
+    post:
+      summary: Create a Message within a conversation
+      tags:
+      - Messages
+      parameters:
+        - in: path
+          name: conversation_id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the messages' conversation
+      responses:
+        '201':
+          description: message created
+          content: {}
+        '400':
+          description: invalid request
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                user_id:
+                  type: integer
+              required:
+              - user_id
+              - content
   /users:
     get:
       summary: Get all Users
