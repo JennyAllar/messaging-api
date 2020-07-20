@@ -4,7 +4,7 @@ info:
   title: Guild API
   version: v1
 paths:
-  "/conversations":
+  '/conversations':
     get:
       summary: Get all Conversations
       tags:
@@ -41,7 +41,7 @@ paths:
               required:
               - sender_id
               - receipient_id
-  "/conversations/:id":
+  '/conversations/{id}':
     get:
       summary: Get a conversation
       tags:
@@ -60,7 +60,7 @@ paths:
         '400':
           description: invalid request
           content: {}
-  "/conversations/:id/messages":
+  '/conversations/{id}/messages':
     get:
       summary: Get a conversations messages
       tags:
@@ -79,7 +79,7 @@ paths:
         '400':
           description: invalid request
           content: {}
-  "/users":
+  '/users':
     get:
       summary: Get all Users
       tags:
@@ -115,7 +115,7 @@ paths:
                   type: string
               required:
               - email
-  "/users/:id":
+  '/users/{id}':
     get:
       summary: Get a User
       tags:
@@ -135,7 +135,7 @@ paths:
           description: invalid request
           content: {}
 
-  "/user/:id/messages":
+  '/user/{id}/messages':
     get:
       summary: Get a users messages
       tags:
