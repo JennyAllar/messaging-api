@@ -37,6 +37,25 @@ RSpec.describe 'Get all messages in a conversation', type: :request do
         expect(JSON.parse(response.body)["total"]).to eq(104)
         expect(JSON.parse(response.body)["messages"].count).to eq(100)
       end
+
+      it 'returns only returns messages from the last thirty days' do
+        2.times do |i|
+          create(
+            :message,
+            content: "So nice to see you, #{i}",
+            conversation_id: @conversation.id,
+            user: @conversation.recipient
+          )
+        end
+
+        Message.last.update(created_at: "2019-07-20T04:05:38.120Z")
+
+        get "/conversations/#{@conversation.id}/messages", params: {}
+
+        expect(response).to be_successful
+        expect(JSON.parse(response.body)["total"]).to eq(3)
+        expect(JSON.parse(response.body)["messages"].count).to eq(2)
+      end
     end
   end
 end

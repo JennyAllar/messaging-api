@@ -6,9 +6,9 @@ class MessagesController < ApplicationController
   end
 
   def index
-    @messages = @conversation.messages
+    @messages = @conversation.messages.where('created_at >= ?', 1.month.ago)
     if @total_messages > 100
-      @messages = @messages[-100..-1]
+      @messages = @messages.where('created_at >= ?', 1.month.ago)[-100..-1]
     end
 
     render json: { total: @total_messages, messages: @messages }, status: 200
