@@ -1,5 +1,5 @@
 # Guild Education - API Challenge
- [![Coverage](https://jennyallar.github.io/messaging-api/badge.svg)](https://github.com/jennyallar/messaging-api)
+ [![Coverage](https://jennyallar.github.io/messaging-api/badge.svg)](https://github.com/jennyallar/messaging-api/badge.svg)
 
 ## Requirements
 - Global API with no security parameters
