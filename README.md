@@ -1,8 +1,8 @@
 # Guild Education - API Challenge
-
+![Coverage](https://marcgrimme.github.io/simplecov-small-badge/badges/coverage_badge_total.png)
 
 ## Requirements
-- Global API with no security parameters 
+- Global API with no security parameters
 - Allows two users to send messages to each other (see: Facebook Messages & Google Chat
 - Recent messages should be available **for a recipient**  (limitations: 100 messages || all messages in last 30 days)
 - Recent messages should be available **from all senders**(limitations: 100 messages || all messages in last 30 days)
