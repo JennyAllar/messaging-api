@@ -10,7 +10,9 @@ class ConversationsController < ApplicationController
       render json: { chat: @conversation }, status: 201
     else
       @conversation = Conversation.create!(conversation_params)
-      render json: { chat: @conversation }, status: 201
+      if @conversation.save
+        render json: { chat: @conversation }, status: 201
+      end
     end
   end
 
