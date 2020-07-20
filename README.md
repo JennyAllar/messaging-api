@@ -3,9 +3,13 @@
 
 ## Using the Application Locally
 `$ git clone git@github.com:JennyAllar/messaging-api.git`
+
 `$ cd messaging-api`
+
 `$ rake db:setup`
+
 `$ bundle install`
+
 `$ rails s`
 And you're off to the races!
 
