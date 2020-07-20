@@ -16,11 +16,15 @@ gem "rswag-specs"
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  %w[rspec-core rspec-expectations rspec-mocks rspec-rails rspec-support].each do |lib|
+  %w[rspec-core rspec-expectations rspec-mocks rspec-support].each do |lib|
     gem lib, git: "https://github.com/rspec/#{lib}.git", branch: 'master' # Previously '4-0-dev' or '4-0-maintenance' branch
   end
   gem 'factory_bot_rails'
   gem 'shoulda-matchers', '~> 4.0'
+end
+
+group :production, :development, :test do
+  gem 'rspec-rails'
 end
 
 group :development do
