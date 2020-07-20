@@ -1,6 +1,6 @@
 # Guild Education - API Challenge
-![Coverage](https://marcgrimme.github.io/simplecov-small-badge/badges/coverage_badge_total.png)
-
+ [![Coverage](https://jennyallar.github.io/messaging-api/badge.svg)](https://github.com/jennyallar/messaging-api)
+ 
 ## Requirements
 - Global API with no security parameters
 - Allows two users to send messages to each other (see: Facebook Messages & Google Chat
